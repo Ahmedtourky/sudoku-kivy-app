@@ -1,4 +1,4 @@
-name: Buildozer
+name: Buildozer Android Build
 
 on: [push]
 
@@ -7,18 +7,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        uses: kivy/buildozer-action@v1
-        id: buildozer
+        uses: kivy/buildozer-action@master
         with:
-          repository_root: .
-          workdir: .
-          buildozer_version: latest
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          build_platform: android debug
