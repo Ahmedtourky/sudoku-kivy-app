@@ -29,6 +29,9 @@ jobs:
           pip install --upgrade pip
           pip install cython==0.29.34  # تحديد إصدار Cython لتجنب مشاكل التوافق
           pip install buildozer
+      - name: Clean Buildozer cache
+        run: |
+          rm -rf .buildozer/
 
       - name: Run Buildozer
         run: |
