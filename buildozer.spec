@@ -9,6 +9,12 @@ requirements = python3,kivy==2.1.0
 orientation = portrait
 fullscreen = 0
 
+# (حوالي السطر 40) تحديد إصدارات أدوات الأندرويد
+android.sdk = 34
+android.ndk = 25b
+android.api = 34
+p4a.branch = master
+
 [buildozer]
 log_level = 2
 warn_on_root = 1
