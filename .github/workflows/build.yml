@@ -1,4 +1,4 @@
-name: Manual Buildozer Build
+name: Final Buildozer Build
 
 on:
   push:
@@ -22,19 +22,26 @@ jobs:
       - name: Install Buildozer and dependencies
         run: |
           sudo apt-get update
-          # قائمة متطلبات محدثة ومتوافقة مع Ubuntu 22.04+
           sudo apt-get install -y git zip unzip openjdk-11-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libffi-dev libssl-dev
-          # تثبيت build-essential الذي يحتوي على أدوات بناء أساسية
           sudo apt-get install -y build-essential
           pip install --upgrade pip
-          pip install cython==0.29.34  # تحديد إصدار Cython لتجنب مشاكل التوافق
+          pip install cython==0.29.34
           pip install buildozer
-      - name: Clean Buildozer cache
-        run: |
-          rm -rf .buildozer/
 
-      - name: Run Buildozer
+      - name: Run Buildozer and manually set paths
         run: |
+          # أولاً، قم بتشغيل Buildozer مرة واحدة لتنزيل وفك ضغط SDK/NDK
+          # نتوقع أن يفشل هذا الأمر، وهذا طبيعي ومقبول تمامًا.
+          buildozer -v android debug || true
+          
+          # الآن، قم بتصدير المسارات الصحيحة يدويًا
+          export ANDROID_HOME=$PWD/.buildozer/android/platform/android-sdk
+          export PATH=$PATH:$ANDROID_HOME/tools
+          export PATH=$PATH:$ANDROID_HOME/platform-tools
+          # بناءً على ملف spec، الإصدار هو 34.0.0
+          export PATH=$PATH:$ANDROID_HOME/build-tools/34.0.0
+          
+          # أخيرًا، قم بتشغيل أمر البناء مرة أخرى بالمسارات الصحيحة
           buildozer -v android debug
 
       - name: Upload artifacts
