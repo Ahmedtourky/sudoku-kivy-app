@@ -8,8 +8,7 @@ version = 1.0
 requirements = python3,kivy==2.1.0
 orientation = portrait
 fullscreen = 0
-
-# (حوالي السطر 40) تحديد إصدارات أدوات الأندرويد
+android.minapi = 23
 android.sdk = 34
 android.ndk = 25b
 android.api = 34
