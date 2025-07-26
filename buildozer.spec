@@ -14,6 +14,8 @@ android.ndk = 25b
 android.api = 34
 p4a.branch = master
 android.archs = armeabi-v7a
+android.sdk_path =
+android.ndk_path =
 
 [buildozer]
 log_level = 2
