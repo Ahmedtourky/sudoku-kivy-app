@@ -1,26 +1,18 @@
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.textinput import TextInput
 
-# This is a placeholder. Replace this with your actual Pygame Sudoku game code.
-import pygame
-import sys
+class SudokuGrid(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.cols = 9
+        self.rows = 9
+        for i in range(81):
+            self.add_widget(TextInput(multiline=False, halign="center", font_size=24))
 
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode((600, 600))
-    pygame.display.set_caption("Sudoku Placeholder")
+class SudokuApp(App):
+    def build(self):
+        return SudokuGrid()
 
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        screen.fill((255, 255, 255)) # Fill screen with white
-        # Add your game drawing code here
-
-        pygame.display.flip()
-
-    pygame.quit()
-    sys.exit()
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    SudokuApp().run()
